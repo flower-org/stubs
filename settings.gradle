@@ -1,0 +1,3 @@
+rootProject.name = 'stubs'
+include 'JavaFXStub'
+include 'SimpleStub'

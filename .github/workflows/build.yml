@@ -1,9 +1,11 @@
 name: Build and Deploy
 
 on:
-  push:
-    branches:
-      - main  # or specify your branch
+  workflow_dispatch:  # This triggers the workflow manually from GitHub UI
+#on:
+#  push:
+#    branches:
+#      - main  # or specify your branch
 
 jobs:
   build:
@@ -12,24 +14,19 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-
       - name: Set up JDK 21 with Temurin
         uses: actions/setup-java@v2
         with:
           distribution: 'temurin'
           java-version: '21'
-
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
-
       - name: Build JAR file with Gradle
         run: ./gradlew build --no-daemon
-
       - name: Build Docker image
         run: |
 #          cp build/libs/*.jar app.jar
           docker build -t teststubs .
-
       - name: Push Docker image to Docker Hub (optional)
         run: |
           docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}

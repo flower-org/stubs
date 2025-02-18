@@ -24,9 +24,10 @@ jobs:
       - name: Build JAR file with Gradle
         run: ./gradlew build --no-daemon
       - name: Build Docker image
-        run: |
+        run: docker build -t teststubs .
+#        run: |
 #          cp build/libs/*.jar app.jar
-          docker build -t teststubs .
+#          docker build -t teststubs .
       - name: Push Docker image to Docker Hub (optional)
         run: |
           docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}

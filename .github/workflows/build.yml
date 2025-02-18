@@ -23,6 +23,10 @@ jobs:
         uses: gradle/actions/setup-gradle@v4
       - name: See structure
         run: ls -la
+      - name: Do wrapper
+        run: gradle wrapper
+      - name: See structure 2
+        run: ls -la
       - name: Build JAR file with Gradle
         run: ./gradlew build --no-daemon
       - name: Build Docker image

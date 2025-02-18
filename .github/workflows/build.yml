@@ -34,5 +34,7 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
-      - name: Push Docker Image
-        run: docker push teststubs
+      - name: Tag Docker image with the repository name
+        run: docker tag teststubs johnamirov83/repo:latest
+      - name: Push Docker image to Docker Hub
+        run: docker push johnamirov83/repo:latest
